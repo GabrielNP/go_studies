@@ -10,9 +10,7 @@ As Go team defined, Go lang has a default Go Workspace at $HOME path. So Go lang
 
 This default path can be changed, but all your Go applications must be on some defined `Go Workspace/src`.
 
-[Declare variables]
-var <'variable name'> <'var type'>
-Ex: var name string
+See [quickstart](quickstart/) folder
 
 ### Commands
 
@@ -30,6 +28,7 @@ Go lang has some conventions and good pratices to avoid problems and arguments.
 |package main|Is the main application's package|
 |func main()|The main function of a program must be called by that name|
 |;|It's not necessary to end some instruction. On the contrary, they ask to not use in these cases|
+|break|It's not necessary on switch statements. But if exists compiler does not care|
 
 #### Hints:
 

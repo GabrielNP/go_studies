@@ -15,7 +15,7 @@ func main() {
 	fmt.Println("Hello World,", name, ",", age, "years old")
 	fmt.Println("Runing Go on", version, "version")
 
-	// Another way to declare variable
+	// Short variable declaration operator: another way to declare variable
 	country := "Brazil"
 	fmt.Println("country is a variable too:", country)
 
@@ -29,9 +29,9 @@ func main() {
 	// User input
 	fmt.Println()
 	fmt.Println("Please, choose an option:")
-	fmt.Println("	1- Iniciar Monitoramento")
-	fmt.Println("	2- Exibir Logs")
-	fmt.Println("	0- Sair do Programa")
+	fmt.Println("	1- Start Monitoring")
+	fmt.Println("	2- Show Logs")
+	fmt.Println("	0- Exit program")
 
 	var option int
 	fmt.Scanf("%d", &option)
@@ -41,4 +41,28 @@ func main() {
 	fmt.Println("Please, confirm: ")
 
 	fmt.Scan(&option) // Since we've already said option variable must be some integer value, with Scan() function we don't need to say the modifier
+
+	// If statements
+	if option == 1 {
+		fmt.Println("Monitoring...")
+	} else if option == 2 {
+		fmt.Println("Showing logs...")
+	} else if option == 0 {
+		fmt.Println("Quiting...")
+	} else {
+		fmt.Println("Invalid option")
+	}
+
+	// Switch statement
+	switch option {
+	case 1:
+		fmt.Println("Monitorando...")
+		break
+	case 2:
+		fmt.Println("Showing logs...")
+	case 0:
+		fmt.Println("Quiting...")
+	default:
+		fmt.Println("Invalid.")
+	}
 }
