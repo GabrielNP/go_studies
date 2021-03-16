@@ -25,7 +25,7 @@ func main() {
 	// Switch statement
 	switch option {
 	case 1:
-		fmt.Println("Monitorando...")
+		fmt.Println("Monitoring...")
 		break
 	case 2:
 		fmt.Println("Showing logs...")
@@ -39,9 +39,7 @@ func main() {
 }
 
 func sayHello() {
-	//  Declare variables
-	var name string = "Gab"
-	var age int = 24
+	name, age := returnUserInfo()
 	var version float32 = 1.16
 
 	// Print on terminal
@@ -80,4 +78,12 @@ func showMenu() {
 	fmt.Println("	1- Start Monitoring")
 	fmt.Println("	2- Show Logs")
 	fmt.Println("	0- Exit program")
+}
+
+func returnUserInfo() (string, int) {
+	//  Declare variables
+	var name string = "Gab"
+	var age int = 24
+
+	return name, age
 }
