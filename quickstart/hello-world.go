@@ -39,16 +39,12 @@ func main() {
 }
 
 func sayHello() {
-	name, age := returnUserInfo()
+	name, age, _ := returnUserInfo()
 	var version float32 = 1.16
 
 	// Print on terminal
 	fmt.Println("Hello World,", name, ",", age, "years old")
 	fmt.Println("Runing Go on", version, "version")
-
-	// Short variable declaration operator: another way to declare variable
-	country := "Brazil"
-	fmt.Println("country is a variable too:", country)
 
 	// Infer types
 	var city = "Sao Paulo"
@@ -80,10 +76,14 @@ func showMenu() {
 	fmt.Println("	0- Exit program")
 }
 
-func returnUserInfo() (string, int) {
+func returnUserInfo() (string, int, string) {
 	//  Declare variables
 	var name string = "Gab"
 	var age int = 24
 
-	return name, age
+	// Short variable declaration operator: another way to declare variable
+	country := "Brazil"
+	fmt.Println("country is a variable too:", country)
+
+	return name, age, country
 }
