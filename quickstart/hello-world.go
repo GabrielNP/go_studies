@@ -21,6 +21,12 @@ func main() {
 			fmt.Println("Arrays")
 		} else if option == 3 {
 			fmt.Println("Slices")
+		} else if option == 4 {
+			fmt.Println("Basic For Loops")
+		} else if option == 5 {
+			fmt.Println("Range For Loops")
+		} else if option == 6 {
+			fmt.Println("Indeterminated For Loops")
 		} else if option == 0 {
 			fmt.Println("Quiting program...")
 			fmt.Println("Thanks for using...")
@@ -39,6 +45,12 @@ func main() {
 		case 3:
 			districts := showDistrictsWithSlices()
 			fmt.Println(districts)
+		case 4:
+			showBasicForLoop()
+		case 5:
+			showRangeForLoop()
+		case 6:
+			showIndeterminatedFor()
 		case 0:
 			os.Exit(0)
 		default:
@@ -83,6 +95,9 @@ func showMenu() {
 	fmt.Println("	1- User info")
 	fmt.Println("	2- Arrays")
 	fmt.Println("	3- Slices")
+	fmt.Println("	4- Loop Statements: basic for")
+	fmt.Println("	5- Loop Statements: range for")
+	fmt.Println("	6- Loop Statements: indeterminated for")
 	fmt.Println("	0- Exit program")
 }
 
@@ -104,7 +119,10 @@ func showDistrictsWithArrays() [4]string {
 
 	var districts [4]string
 	fmt.Println("type:", reflect.TypeOf(districts))
+	fmt.Println("length:", len(districts))
+	fmt.Println("capacity:", cap(districts))
 	fmt.Println()
+	fmt.Println("Cannot has its length improved, i.e., doesn't accept more elements than those were previously defined")
 
 	districts[0] = "RJ"
 	districts[1] = "SP"
@@ -120,7 +138,44 @@ func showDistrictsWithSlices() []string {
 
 	districts := []string{"RJ", "SP", "MG", "ES"}
 	fmt.Println("type:", reflect.TypeOf(districts))
+	fmt.Println("length:", len(districts))
+	fmt.Println("capacity:", cap(districts))
+	fmt.Println()
+
+	fmt.Println("Adding one more element")
+	districts = append(districts, "AM")
+
+	fmt.Println("length:", len(districts))
+	fmt.Println("capacity:", cap(districts))
+	fmt.Println("Note that the inital capacity were doubled")
 	fmt.Println()
 
 	return districts
+}
+
+func showBasicForLoop() {
+	districts := []string{"RJ", "SP", "MG", "ES"}
+
+	for i := 0; i < len(districts); i++ {
+		fmt.Println(districts[i])
+	}
+}
+
+func showRangeForLoop() {
+	districts := []string{"RJ", "SP", "MG", "ES"}
+
+	for i, district := range districts {
+		fmt.Println("Estou passando na posição", i, "do meu slice e essa posição tem o site", district)
+	}
+}
+
+func showIndeterminatedFor() {
+	i := 0
+	for {
+		if i > 10 {
+			os.Exit(0)
+		}
+		fmt.Println(i)
+		i++
+	}
 }
