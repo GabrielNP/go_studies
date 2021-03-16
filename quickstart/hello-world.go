@@ -27,6 +27,8 @@ func main() {
 			fmt.Println("Range For Loops")
 		} else if option == 6 {
 			fmt.Println("Indeterminated For Loops")
+		} else if option == 7 {
+			fmt.Println("Running map")
 		} else if option == 0 {
 			fmt.Println("Quiting program...")
 			fmt.Println("Thanks for using...")
@@ -51,6 +53,8 @@ func main() {
 			showRangeForLoop()
 		case 6:
 			showIndeterminatedFor()
+		case 7:
+			showMap()
 		case 0:
 			os.Exit(0)
 		default:
@@ -98,6 +102,7 @@ func showMenu() {
 	fmt.Println("	4- Loop Statements: basic for")
 	fmt.Println("	5- Loop Statements: range for")
 	fmt.Println("	6- Loop Statements: indeterminated for")
+	fmt.Println("	7- map")
 	fmt.Println("	0- Exit program")
 }
 
@@ -178,4 +183,13 @@ func showIndeterminatedFor() {
 		fmt.Println(i)
 		i++
 	}
+}
+
+func showMap() {
+	object := make(map[string]string)
+
+	object["name"] = "Gabriel"
+	object["age"] = "24"
+
+	fmt.Println(object)
 }
