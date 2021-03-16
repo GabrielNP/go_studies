@@ -1,9 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
+	"io/ioutil"
 	"os"
 	"reflect"
+	"strings"
 )
 
 func main() {
@@ -29,9 +33,10 @@ func main() {
 			fmt.Println("Indeterminated For Loops")
 		} else if option == 7 {
 			fmt.Println("Running map")
+		} else if option == 8 {
+			fmt.Println("Working with files")
 		} else if option == 0 {
-			fmt.Println("Quiting program...")
-			fmt.Println("Thanks for using...")
+			fmt.Println("Quiting program...\nThanks for using...")
 		} else {
 			fmt.Println("Invalid option!")
 		}
@@ -39,7 +44,8 @@ func main() {
 		// Switch statement
 		switch option {
 		case 1:
-			fmt.Println(returnUserInfo())
+			name, age, country := returnUserInfo()
+			fmt.Printf("Name: %s\nAge: %d\nCountry: %s", name, age, country)
 			break
 		case 2:
 			districts := showDistrictsWithArrays()
@@ -55,6 +61,8 @@ func main() {
 			showIndeterminatedFor()
 		case 7:
 			showMap()
+		case 8:
+			readFromFile()
 		case 0:
 			os.Exit(0)
 		default:
@@ -102,8 +110,40 @@ func showMenu() {
 	fmt.Println("	4- Loop Statements: basic for")
 	fmt.Println("	5- Loop Statements: range for")
 	fmt.Println("	6- Loop Statements: indeterminated for")
-	fmt.Println("	7- map")
+	fmt.Println("	7- Map")
+	fmt.Println("	8- Files")
 	fmt.Println("	0- Exit program")
+}
+
+func readFromFile() {
+	fmt.Print("Reading with os.Open() method: ")
+	file, err := os.Open("./data/sites.txt")
+	if err != nil {
+		fmt.Println("An error ocurred:", err)
+	}
+	fmt.Println(file)
+	fmt.Println("It returned the pointer to variable")
+	fmt.Println()
+
+	fmt.Print("Reading with ioutil.ReadFile() method:")
+	f, e := ioutil.ReadFile("./data/sites.txt")
+	if e != nil {
+		fmt.Println("Ocorreu um erro:", e)
+	}
+	fmt.Println()
+	fmt.Println(string(f))
+	fmt.Println()
+
+	fmt.Print("Reading with bufio lib")
+	reader := bufio.NewReader(file)
+	for {
+		line, er := reader.ReadString('\n')
+		line = strings.TrimSpace(line)
+		if er == io.EOF {
+			break
+		}
+		fmt.Println(line)
+	}
 }
 
 func returnUserInfo() (string, int, string) {
@@ -113,7 +153,6 @@ func returnUserInfo() (string, int, string) {
 
 	// Short variable declaration operator: another way to declare variable
 	country := "Brazil"
-	fmt.Println("country is a variable too:", country)
 
 	return name, age, country
 }

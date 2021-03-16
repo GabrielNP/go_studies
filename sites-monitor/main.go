@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -41,6 +44,29 @@ func readChosenOption() int {
 	return option
 }
 
+func readSitesFromFile() []string {
+	var sites []string
+
+	file, err := os.Open("./data/sites.txt")
+	if err == nil {
+		reader := bufio.NewReader(file)
+
+		for {
+			line, err := reader.ReadString('\n')
+			line = strings.TrimSpace(line)
+			if err == io.EOF {
+				break
+			}
+			sites = append(sites, line)
+		}
+
+	} else {
+		fmt.Println("An error ocurred:", err)
+	}
+
+	return sites
+}
+
 func sayHello() {
 	var name string = "Gab"
 	var age int = 24
@@ -60,7 +86,7 @@ func showMenu() {
 
 func startMonitoring() {
 	fmt.Println("\nMonitoring...")
-	sites := []string{"https://random-status-code.herokuapp.com/"}
+	sites := readSitesFromFile()
 
 	for i := 0; i < nMonitoring; i++ {
 		for _, site := range sites {
@@ -71,11 +97,11 @@ func startMonitoring() {
 }
 
 func testSite(site string) {
-	resp, _ := http.Get(site)
-	if resp.StatusCode == 200 {
-		fmt.Println("Site", site, "was successfully loaded")
+	resp, err := http.Get(site)
+	if err != nil {
+		fmt.Printf("Site %s couldn't be loaded.\nStatus Code: %s\nError: %s", site, resp.Status, err)
 	} else {
-		fmt.Println("Site", site, "couldn't be loaded.\nStatus Code:", resp.Status)
+		fmt.Println("Site", site, "was successfully loaded")
 	}
 	fmt.Println()
 }
