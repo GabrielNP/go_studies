@@ -16,33 +16,33 @@ func main() {
 
 		// If statements
 		if option == 1 {
-			fmt.Println("Monitoring...")
+			fmt.Println("Getting user info...")
 		} else if option == 2 {
-			fmt.Println("Showing logs...")
+			fmt.Println("Arrays")
 		} else if option == 3 {
-			districts := showDistrictsWithArrays()
-			fmt.Println(districts)
+			fmt.Println("Slices")
 		} else if option == 0 {
-			fmt.Println("Quiting...")
+			fmt.Println("Quiting program...")
+			fmt.Println("Thanks for using...")
 		} else {
-			fmt.Println("Invalid option")
+			fmt.Println("Invalid option!")
 		}
 
 		// Switch statement
 		switch option {
 		case 1:
-			fmt.Println("Monitoring...")
+			fmt.Println(returnUserInfo())
 			break
 		case 2:
-			fmt.Println("Showing logs...")
+			districts := showDistrictsWithArrays()
+			fmt.Println(districts)
 		case 3:
 			districts := showDistrictsWithSlices()
 			fmt.Println(districts)
 		case 0:
-			fmt.Println("Quiting...")
 			os.Exit(0)
 		default:
-			fmt.Println("Invalid!")
+			fmt.Println("Exiting with error...")
 			os.Exit(-1)
 		}
 	}
@@ -80,9 +80,9 @@ func readChosenOption() int {
 func showMenu() {
 	fmt.Println()
 	fmt.Println("Please, choose an option:")
-	fmt.Println("	1- Start Monitoring")
-	fmt.Println("	2- Show Logs")
-	fmt.Println("	3- Show Districts")
+	fmt.Println("	1- User info")
+	fmt.Println("	2- Arrays")
+	fmt.Println("	3- Slices")
 	fmt.Println("	0- Exit program")
 }
 
@@ -99,10 +99,13 @@ func returnUserInfo() (string, int, string) {
 }
 
 func showDistrictsWithArrays() [4]string {
-	// Go lang arrays
-	fmt.Println("Showing districts with arrays")
+	// Arrays
+	fmt.Println("This is a defined array with 4 elements")
 
 	var districts [4]string
+	fmt.Println("type:", reflect.TypeOf(districts))
+	fmt.Println()
+
 	districts[0] = "RJ"
 	districts[1] = "SP"
 	districts[2] = "MG"
@@ -112,10 +115,12 @@ func showDistrictsWithArrays() [4]string {
 }
 
 func showDistrictsWithSlices() []string {
-	// Go lang arrays
-	fmt.Println("Showing districts with slices")
+	// Slices
+	fmt.Println("This is a slice")
 
 	districts := []string{"RJ", "SP", "MG", "ES"}
+	fmt.Println("type:", reflect.TypeOf(districts))
+	fmt.Println()
 
 	return districts
 }
