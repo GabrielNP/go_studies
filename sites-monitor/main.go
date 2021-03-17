@@ -4,8 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -26,6 +28,7 @@ func main() {
 			break
 		case 2:
 			fmt.Println("Showing logs...")
+			showLogs()
 		case 0:
 			fmt.Println("Quiting...")
 			os.Exit(0)
@@ -76,6 +79,30 @@ func sayHello() {
 	fmt.Println("Runing Go on", version, "version")
 }
 
+func saveLog(site string, status bool) {
+	file, err := os.OpenFile("./sites-monitor/log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro:", err)
+		file.Close()
+	}
+
+	file.WriteString(time.Now().Format("2006-01-02 15:04:05") + " - online:" + strconv.FormatBool(status) + " - " + site + "\n")
+
+	file.Close()
+}
+
+func showLogs() {
+	file, err := ioutil.ReadFile("./sites-monitor/log.txt")
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro:", err)
+	}
+	fmt.Println()
+	fmt.Println(string(file))
+	fmt.Println()
+}
+
 func showMenu() {
 	fmt.Println()
 	fmt.Println("Please, choose an option:")
@@ -100,8 +127,10 @@ func testSite(site string) {
 	resp, err := http.Get(site)
 	if err != nil {
 		fmt.Printf("Site %s couldn't be loaded.\nStatus Code: %s\nError: %s", site, resp.Status, err)
+		saveLog(site, false)
 	} else {
 		fmt.Println("Site", site, "was successfully loaded")
+		saveLog(site, true)
 	}
 	fmt.Println()
 }

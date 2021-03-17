@@ -34,7 +34,9 @@ func main() {
 		} else if option == 7 {
 			fmt.Println("Running map")
 		} else if option == 8 {
-			fmt.Println("Working with files")
+			fmt.Println("Reading files")
+		} else if option == 9 {
+			fmt.Println("Writing files")
 		} else if option == 0 {
 			fmt.Println("Quiting program...\nThanks for using...")
 		} else {
@@ -63,6 +65,8 @@ func main() {
 			showMap()
 		case 8:
 			readFromFile()
+		case 9:
+			writeFile()
 		case 0:
 			os.Exit(0)
 		default:
@@ -111,7 +115,8 @@ func showMenu() {
 	fmt.Println("	5- Loop Statements: range for")
 	fmt.Println("	6- Loop Statements: indeterminated for")
 	fmt.Println("	7- Map")
-	fmt.Println("	8- Files")
+	fmt.Println("	8- Read File")
+	fmt.Println("	9- Write File")
 	fmt.Println("	0- Exit program")
 }
 
@@ -231,4 +236,17 @@ func showMap() {
 	object["age"] = "24"
 
 	fmt.Println(object)
+}
+
+func writeFile() {
+	file, err := os.OpenFile("./quickstart/file.txt", os.O_RDWR|os.O_CREATE, 0666)
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro:", err)
+		file.Close()
+	}
+
+	file.WriteString("Hello, world!")
+
+	file.Close()
 }

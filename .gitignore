@@ -13,3 +13,7 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Text Files
+quickstart/file.txt
+sites-monitor/log.txt
