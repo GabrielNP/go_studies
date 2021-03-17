@@ -40,4 +40,8 @@ There are some VS code extensions that automatically clean some bad pratices. Ta
 
 [Go Doc](www.golang.org)
 
+[Go / Golang Crash Course](https://www.youtube.com/watch?v=SqrbIlUwR0U)
+
 https://cursos.alura.com.br/course/golang
+
+https://cursos.alura.com.br/course/go-lang-web/
