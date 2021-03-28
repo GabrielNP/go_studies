@@ -34,6 +34,8 @@ Go lang has some conventions and good pratices to avoid problems and arguments.
 
 There are some VS code extensions that automatically clean some bad pratices. Take a look on "Go by Go Team at Google" and accept all its dependencies.
 
+Anything you need that is not native from Go lang, you can find at [Go pkg doc](https://pkg.go.dev/)
+
 
 
 ## References
