@@ -50,7 +50,7 @@ func readChosenOption() int {
 func readSitesFromFile() []string {
 	var sites []string
 
-	file, err := os.Open("./data/sites.txt")
+	file, err := os.Open("data/sites.txt")
 	if err == nil {
 		reader := bufio.NewReader(file)
 
@@ -80,7 +80,7 @@ func sayHello() {
 }
 
 func saveLog(site string, status bool) {
-	file, err := os.OpenFile("./sites-monitor/log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 
 	if err != nil {
 		fmt.Println("Ocorreu um erro:", err)
@@ -93,7 +93,7 @@ func saveLog(site string, status bool) {
 }
 
 func showLogs() {
-	file, err := ioutil.ReadFile("./sites-monitor/log.txt")
+	file, err := ioutil.ReadFile("log.txt")
 
 	if err != nil {
 		fmt.Println("Ocorreu um erro:", err)
