@@ -1,7 +1,7 @@
 SHELL=/bin/zsh
 
 init:
-	export GOPATH=$PWD
+	export GOPATH=$(PWD)
 
 run:
 	go run main.go
