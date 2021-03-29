@@ -1,13 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
-	"io/ioutil"
 	"os"
 	"reflect"
-	"strings"
 )
 
 func main() {
@@ -37,6 +33,8 @@ func main() {
 			fmt.Println("Reading files")
 		} else if option == 9 {
 			fmt.Println("Writing files")
+		} else if option == 10 {
+			fmt.Println("Go Routine")
 		} else if option == 0 {
 			fmt.Println("Quiting program...\nThanks for using...")
 		} else {
@@ -67,6 +65,8 @@ func main() {
 			readFromFile()
 		case 9:
 			writeFile()
+		case 10:
+			run()
 		case 0:
 			os.Exit(0)
 		default:
@@ -92,19 +92,6 @@ func sayHello() {
 	fmt.Println("Type of simpleFloat variable is", reflect.TypeOf(simpleFloat))
 }
 
-func readChosenOption() int {
-	// User input
-	var option int
-	fmt.Scanf("%d", &option)
-	fmt.Println("The chosen command was:", option)
-
-	fmt.Println("Please, confirm: ")
-	fmt.Scan(&option) // Since we've already said option variable must be some integer value, with Scan() function we don't need to say the modifier
-	fmt.Println()
-
-	return option
-}
-
 func showMenu() {
 	fmt.Println()
 	fmt.Println("Please, choose an option:")
@@ -117,38 +104,8 @@ func showMenu() {
 	fmt.Println("	7- Map")
 	fmt.Println("	8- Read File")
 	fmt.Println("	9- Write File")
+	fmt.Println("	10- Go routine")
 	fmt.Println("	0- Exit program")
-}
-
-func readFromFile() {
-	fmt.Print("Reading with os.Open() method: ")
-	file, err := os.Open("./data/sites.txt")
-	if err != nil {
-		fmt.Println("An error ocurred:", err)
-	}
-	fmt.Println(file)
-	fmt.Println("It returned the pointer to variable")
-	fmt.Println()
-
-	fmt.Print("Reading with ioutil.ReadFile() method:")
-	f, e := ioutil.ReadFile("./data/sites.txt")
-	if e != nil {
-		fmt.Println("Ocorreu um erro:", e)
-	}
-	fmt.Println()
-	fmt.Println(string(f))
-	fmt.Println()
-
-	fmt.Print("Reading with bufio lib")
-	reader := bufio.NewReader(file)
-	for {
-		line, er := reader.ReadString('\n')
-		line = strings.TrimSpace(line)
-		if er == io.EOF {
-			break
-		}
-		fmt.Println(line)
-	}
 }
 
 func returnUserInfo() (string, int, string) {
@@ -160,93 +117,4 @@ func returnUserInfo() (string, int, string) {
 	country := "Brazil"
 
 	return name, age, country
-}
-
-func showDistrictsWithArrays() [4]string {
-	// Arrays
-	fmt.Println("This is a defined array with 4 elements")
-
-	var districts [4]string
-	fmt.Println("type:", reflect.TypeOf(districts))
-	fmt.Println("length:", len(districts))
-	fmt.Println("capacity:", cap(districts))
-	fmt.Println()
-	fmt.Println("Cannot has its length improved, i.e., doesn't accept more elements than those were previously defined")
-
-	districts[0] = "RJ"
-	districts[1] = "SP"
-	districts[2] = "MG"
-	districts[3] = "ES"
-
-	return districts
-}
-
-func showDistrictsWithSlices() []string {
-	// Slices
-	fmt.Println("This is a slice")
-
-	districts := []string{"RJ", "SP", "MG", "ES"}
-	fmt.Println("type:", reflect.TypeOf(districts))
-	fmt.Println("length:", len(districts))
-	fmt.Println("capacity:", cap(districts))
-	fmt.Println()
-
-	fmt.Println("Adding one more element")
-	districts = append(districts, "AM")
-
-	fmt.Println("length:", len(districts))
-	fmt.Println("capacity:", cap(districts))
-	fmt.Println("Note that the inital capacity were doubled")
-	fmt.Println()
-
-	return districts
-}
-
-func showBasicForLoop() {
-	districts := []string{"RJ", "SP", "MG", "ES"}
-
-	for i := 0; i < len(districts); i++ {
-		fmt.Println(districts[i])
-	}
-}
-
-func showRangeForLoop() {
-	districts := []string{"RJ", "SP", "MG", "ES"}
-
-	for i, district := range districts {
-		fmt.Println("Estou passando na posição", i, "do meu slice e essa posição tem o site", district)
-	}
-}
-
-func showIndeterminatedFor() {
-	i := 0
-	for {
-		if i > 10 {
-			os.Exit(0)
-		}
-		fmt.Println(i)
-		i++
-	}
-}
-
-func showMap() {
-	object := make(map[string]string)
-
-	object["name"] = "Gabriel"
-	object["age"] = "24"
-
-	fmt.Println(object)
-}
-
-func writeFile() {
-	file, err := os.OpenFile("./quickstart/file.txt", os.O_RDWR|os.O_CREATE, 0666)
-
-	if err != nil {
-		fmt.Println("Ocorreu um erro:", err)
-		file.Close()
-	}
-
-	file.WriteString("Hello, world!")
-
-	file.Close()
 }
