@@ -1,8 +1,12 @@
 # Go lang studies repo
 
-## Set up
+## Projects develop to the studies
 
-## How to run
+[Quick Start](./quickstart)
+
+[Sites Monitor](./sites-monitor)
+
+[Web Store App](./web-store-app)
 
 ## Personal Doc about Go
 
