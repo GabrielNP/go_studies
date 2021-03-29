@@ -1,6 +1,8 @@
 package models
 
-import "go_studies/web-store-app/db"
+import (
+	"go_studies/web-store-app/db"
+)
 
 type Product struct {
 	Id          int
@@ -41,4 +43,16 @@ func SelectProducts() []Product {
 	}
 
 	return produtcs
+}
+
+func CreateProduct(name, description string, price float64, amount int) {
+	db := db.ConnectDatabase()
+	defer db.Close()
+
+	insertDb, err := db.Prepare("INSERT INTO products (name, description, price, amount) VALUES ($1, $2, $3, $4)")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	insertDb.Exec(name, description, price, amount)
 }
