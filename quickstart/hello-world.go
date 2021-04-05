@@ -35,6 +35,8 @@ func main() {
 			fmt.Println("Writing files")
 		} else if option == 10 {
 			fmt.Println("Go Routine")
+		} else if option == 11 {
+			fmt.Println("Variadic Functions")
 		} else if option == 0 {
 			fmt.Println("Quiting program...\nThanks for using...")
 		} else {
@@ -67,6 +69,11 @@ func main() {
 			writeFile()
 		case 10:
 			run()
+		case 11:
+			fmt.Println(sum(1))
+			fmt.Println(sum(1, 1))
+			fmt.Println(sum(1, 1, 1))
+			fmt.Println(sum(1, 1, 2, 4))
 		case 0:
 			os.Exit(0)
 		default:
@@ -105,6 +112,7 @@ func showMenu() {
 	fmt.Println("	8- Read File")
 	fmt.Println("	9- Write File")
 	fmt.Println("	10- Go routine")
+	fmt.Println("	11- Variadic Functions")
 	fmt.Println("	0- Exit program")
 }
 
