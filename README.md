@@ -8,6 +8,8 @@
 
 [Web Store App](./web-store-app)
 
+[Object-oriented Concepts](./oop)
+
 ## Personal Doc about Go
 
 As Go team defined, Go lang has a default Go Workspace at $HOME path. So Go lang always waits to `go/` folder and inside it `src/`, `pkg/` and `bin/` folders at Go workspace path.
