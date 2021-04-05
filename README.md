@@ -1,6 +1,6 @@
 # Go lang studies repo
 
-## Projects develop to the studies
+## Projects developed to the studies
 
 [Quick Start](./quickstart)
 
