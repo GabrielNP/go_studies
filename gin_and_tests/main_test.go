@@ -10,14 +10,37 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"gin_and_tests/controllers"
+	"gin_and_tests/database"
+	"gin_and_tests/models"
 )
 
+var ID int
+
 func setupTestRoutes() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode) // minimalist test response
 	routes := gin.Default()
 	return routes
 }
 
+func createStudentMock() {
+	student := models.Student{
+		Name:                "Name Test 1",
+		FederalRegistration: "12345678901",
+		DocumentNumber:      "12345678X",
+	}
+	database.DB.Create(&student)
+	ID = int(student.ID)
+}
+
+func deleteStudentMock() {
+	var student models.Student
+	database.DB.Delete(&student.ID)
+}
+
 func TestCheckStatusCodeGreetRequestWithParam(t *testing.T) {
+	database.Connect()
+	createStudentMock()
+	// defer deleteStudentMock()
 	r := setupTestRoutes()
 	r.GET("/:name", controllers.Greet)
 	req, _ := http.NewRequest("GET", "/gabriel", nil)
